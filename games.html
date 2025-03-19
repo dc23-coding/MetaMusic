@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Games & Wallet</title>
+  <!-- Link to your theme stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Additional styling specific to the games/wallet page */
+    .wallet-container {
+      background-color: var(--bg-secondary);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 300px;
+      margin: 2rem auto;
+    }
+    .wallet-container button {
+      background-color: var(--accent);
+      color: var(--bg-primary);
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: opacity 0.3s ease;
+    }
+    .wallet-container button:hover {
+      opacity: 0.9;
+    }
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .game-box {
+      background-color: var(--bg-secondary);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .game-box:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+<body>
+  <!-- Optional header; you can include your constant navigation here -->
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="images/logo.png" alt="Delusions Of Grandeur Logo" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="episodes.html">Episodes</a></li>
+        <li><a href="music.html">Music</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- MetaMask Wallet Connect Widget -->
+    <section class="wallet-container">
+      <button id="connectMetaMask">Connect MetaMask</button>
+      <p id="walletAddress"></p>
+    </section>
+
+    <!-- Games Grid: 4 Column Boxes -->
+    <section class="games-grid">
+      <div class="game-box">Game 1</div>
+      <div class="game-box">Game 2</div>
+      <div class="game-box">Game 3</div>
+      <div class="game-box">Game 4</div>
+      <!-- You can add more boxes as needed -->
+    </section>
+  </main>
+
+  <!-- MetaMask Connection Script -->
+  <script>
+    async function connectMetaMask() {
+      if (window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          document.getElementById("walletAddress").innerText = `Connected: ${accounts[0]}`;
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        alert("MetaMask is not installed. Please install it to use this feature.");
+      }
+    }
+    document.getElementById("connectMetaMask").addEventListener("click", connectMetaMask);
+  </script>
+</body>
+</html>

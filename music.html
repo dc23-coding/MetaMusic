@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music Page</title>
+  <link rel="stylesheet" href="music.css">
+  <script src="https://unpkg.com/wavesurfer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="music-player.js" defer></script>
+  <script src="particles-init.js" defer></script>
+</head>
+
+<body>
+  <div id="particles-js"></div>
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="images/H2.png" alt="Delusions Of Grandeur Logo">
+      </div>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="episodes.html">Episodes</a></li>
+        <li><a href="music.html">Music</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+      <ul class="quick-pick-menu">
+        <li><a href="#">Quick Pick</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="music-player">
+      <!-- The pulse element -->
+      <div id="pulse"></div>
+      <!-- The WaveSurfer visualization -->
+      <div id="waveform"></div>
+      <!-- Now Playing display -->
+      <div class="now-playing" id="nowPlaying">Now Playing: </div>
+      <div class="player-controls">
+        <button id="prevBtn">Prev</button>
+        <button id="playPauseBtn">Play/Pause</button>
+        <button id="nextBtn">Next</button>
+      </div>
+      <ul class="track-list" id="trackList">
+        <li data-src="audio/We-Gone-Ball.mp3">We Gone Ball</li>
+        <li data-src="audio/Why-Not.mp3">Why Not</li>
+        <li data-src="audio/Really-Wanna-See.mp3">Really Wanna See</li>
+        <li data-src="audio/Kick-Back-and-Chill.mp3">Kick Back and Chill</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://www.youtube.com/@Thelazyakata">YouTube</a>
+      <a href="https://www.instagram.com/cleshay_heru/p#">Instagram</a>
+      <a href="https://www.tiktok.com/@cleshayheru">TikTok</a>
+    </div>
+    <p>&copy; 2025 Harvest Union. All Rights Reserved</p>
+  </footer>
+</body>
+
+</html>

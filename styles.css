@@ -1,0 +1,260 @@
+:root {
+    --bg-primary: #121212;
+    --bg-secondary: #333333;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --accent: #bb86fc;
+    --error: #cf6679;
+    --success: #03dac6;
+}
+
+/* Global Resets */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fixed Border Design */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(to bottom, rgba(187,134,252,0.2), rgba(3,218,198,0.2));
+    z-index: 10;
+}
+body::before { left: 0; }
+body::after { right: 0; }
+
+@media (max-width: 1024px) {
+    body::before,
+    body::after { display: none; }
+}
+
+/* Base Body Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Header and Navigation */
+header {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo img { height: 50px; }
+.nav-links,
+.quick-pick-menu {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+}
+.nav-links a,
+.quick-pick-menu a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+.nav-links a:hover,
+.quick-pick-menu a:hover { color: var(--accent); }
+
+/* Main Content Container */
+main {
+    margin-top: 6rem;
+    padding: 4rem 0;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Video Hero Section */
+.video-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+#landing-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.video-hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Adjust for desired transparency */
+    z-index: 1;
+}
+.video-hero .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: var(--text-primary);
+    text-align: center;
+}
+.video-hero .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+.video-hero .hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+.video-hero .hero-content .btn {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    background-color: var(--accent);
+    color: var(--bg-primary);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+.video-hero .hero-content .btn:hover { opacity: 0.9; }
+
+/* Other Sections (Episodes, Videos, Newsletter) */
+.latest-episodes,
+.youtube-section,
+.newsletter { margin: 4rem 0; }
+.episode-grid,
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.episode-card,
+.video-card {
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-bottom: 10px;
+}
+.episode-card:hover,
+.video-card:hover { transform: translateY(-5px); }
+
+/* Video Thumbnail & Play Button */
+.video-thumbnail {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.video-thumbnail img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50%;
+    font-size: 18px;
+}
+.video-card:hover {
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
+
+/* Responsive Video Container for Embedded Videos */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Newsletter Section */
+.newsletter {
+    background-color: var(--bg-primary);
+    padding: 3rem;
+    border-radius: 8px;
+    text-align: center;
+}
+.newsletter form {
+    display: flex;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 2rem auto;
+}
+.newsletter input {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Button Styles */
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--accent);
+    color: var(--bg-primary);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+.btn:hover { opacity: 0.9; }
+
+/* Footer */
+footer {
+    background-color: var(--bg-secondary);
+    padding: 2rem;
+    margin-top: 4rem;
+    text-align: center;
+}
+.social-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .newsletter form { flex-direction: column; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
