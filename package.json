@@ -1,4 +1,9 @@
 {
+  "name": "metaVerse",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "echo \"No build step needed\""
+  },
   "dependencies": {
     "@glidejs/glide": "^3.7.1"
   }

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Episodes Page</title>
+  <!-- Glide.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
+  <!-- Main CSS -->
+  <style>
+    :root {
+      --bg-primary: #121212;
+      --bg-secondary: #333333;
+      --text-primary: #ffffff;
+      --text-secondary: #b3b3b3;
+      --accent: #bb86fc;
+      --error: #cf6679;
+      --success: #03dac6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Fixed border design */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      width: 250px;
+      /* Adjust width as needed */
+      height: 100vh;
+      background: linear-gradient(to bottom, rgba(187, 134, 252, 0.2), rgba(3, 218, 198, 0.2));
+      z-index: 10;
+    }
+
+    body::before {
+      left: 0;
+    }
+
+    body::after {
+      right: 0;
+    }
+
+    @media (max-width: 1024px) {
+      body::before,
+      body::after {
+        display: none;
+      }
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+      padding: 1rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    .nav-links,
+    .quick-pick-menu {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+    }
+
+    .nav-links a,
+    .quick-pick-menu a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-links a:hover,
+    .quick-pick-menu a:hover {
+      color: var(--accent);
+    }
+
+    main {
+      margin-top: 6rem;
+      padding: 4rem 0;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 0;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .hero p {
+      color: var(--text-secondary);
+      height: 5%;
+    }
+
+    .latest-episodes,
+    .youtube-section,
+    .newsletter {
+      margin: 4rem 0;
+    }
+
+    .episode-grid,
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .episode-card,
+    .video-card {
+      background-color: var(--bg-secondary);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    .video-card:last-child {
+      margin-bottom: 10;
+    }
+
+    .episode-card:hover,
+    .video-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .video-thumbnail {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .video-thumbnail img {
+      width: 150px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50%;
+      font-size: 18px;
+    }
+
+    .video-card:hover {
+      transform: scale(1.05);
+      transition: 0.3s ease;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Home Page Styles */
+    .border-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100vh;
+      background: linear-gradient(to bottom, rgba(187, 134, 252, 0.2), rgba(3, 218, 198, 0.2));
+      z-index: 10;
+    }
+
+    .border-overlay::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 250px;
+      height: 100vh;
+      background: linear-gradient(to bottom, rgba(187, 134, 252, 0.2), rgba(3, 218, 198, 0.2));
+      z-index: 10;
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #landing-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: var(--text-primary);
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-content .btn {
+      font-size: 1.2rem;
+      padding: 1rem 2rem;
+      background-color: var(--accent);
+      color: var(--bg-primary);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .hero-content .btn:hover {
+      opacity: 0.9;
+    }
+
+    .games {
+      background-color: var(--bg-primary);
+      padding: 3rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .games form {
+      display: flex;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 2rem auto;
+    }
+
+    .games input {
+      flex: 1;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 4px;
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      background-color: var(--accent);
+      color: var(--bg-primary);
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      background-color: var(--bg-secondary);
+      padding: 2rem;
+      margin-top: 4rem;
+      text-align: center;
+    }
+
+    .social-links a {
+      color: var(--text-primary);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .newsletter form {
+        flex-direction: column;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="/Users/cleshay/Documents/WebApp/Artist/d.o.g./H2.png" alt="Delusions Of Grandeur Logo">
+      </div>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="episodes.html">Episodes</a></li>
+        <li><a href="music.html">Music</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+      <ul class="quick-pick-menu">
+        <li><a href="#">Quick Pick</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Featured Video Section -->
+    <section class="video-display">
+      <h2>Featured Video</h2>
+      <div class="main-video-container">
+        <iframe id="main-video" width="100%" height="500" src="https://www.youtube.com/embed/UkcP_TM9ytE" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- Latest Videos Section (with Glide Carousel) -->
+    <section class="youtube-section">
+      <h2>Latest Videos</h2>
+      <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+            <li class="glide__slide video-card" data-video="https://www.youtube.com/embed/UkcP_TM9ytE">
+              <div class="video-thumbnail">
+                <img src="/Users/cleshay/Documents/WebApp/Artist/d.o.g./HU.png" alt="Video Thumbnail">
+                <span class="play-button">▶</span>
+              </div>
+              <h3>No Souls At The Poles</h3>
+            </li>
+            <li class="glide__slide video-card" data-video="https://www.youtube.com/embed/oLSvwaDd3H8">
+              <div class="video-thumbnail">
+                <img src="/Users/cleshay/Documents/WebApp/Artist/d.o.g./HU.png" alt="Video Thumbnail">
+                <span class="play-button">▶</span>
+              </div>
+              <h3>We Gone Ball</h3>
+            </li>
+            <li class="glide__slide video-card" data-video="https://www.youtube.com/embed/ED8aMZV2xCY">
+              <div class="video-thumbnail">
+                <img src="/Users/cleshay/Documents/WebApp/Artist/d.o.g./HU.png" alt="Video Thumbnail">
+                <span class="play-button">▶</span>
+              </div>
+              <h3>Kick Back And Chill</h3>
+            </li>
+            <li class="glide__slide video-card" data-video="https://www.youtube.com/embed/zxAlNUL2igc?si=ZdEfk2ISoj7a6WcE">
+              <div class="video-thumbnail">
+                <img src="/Users/cleshay/Documents/WebApp/Artist/d.o.g./HU.png" alt="Video Thumbnail">
+                <span class="play-button">▶</span>
+              </div>
+              <h3>My Baby</h3>
+            </li>
+          </ul>
+        </div>
+        <!-- Navigation Arrows (Optional) -->
+        <div class="glide__arrows" data-glide-el="controls">
+          <button class="glide__arrow glide__arrow--left" data-glide-dir="<">Prev</button>
+          <button class="glide__arrow glide__arrow--right" data-glide-dir=">">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Podcast Episodes Section -->
+    <section class="latest-episodes">
+      <h2>Podcast Episodes</h2>
+      <div class="episode-grid">
+        <div class="episode-card">
+          <h3>Episode 1</h3>
+          <p>Discussion on current events.</p>
+          <a href="episode1.html" class="btn">Watch Now</a>
+        </div>
+        <div class="episode-card">
+          <h3>Episode 2</h3>
+          <p>Deep dive into finance.</p>
+          <a href="episode2.html" class="btn">Watch Now</a>
+        </div>
+        <div class="episode-card">
+          <h3>Episode 3</h3>
+          <p>Debate on technology trends.</p>
+          <a href="episode3.html" class="btn">Watch Now</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://www.youtube.com/@Thelazyakata">YouTube</a>
+      <a href="https://www.instagram.com/cleshay_heru/p#">Instagram</a>
+      <a href="https://www.tiktok.com/@cleshayheru">TikTok</a>
+    </div>
+    <p>&copy; 2025 Harvest Union. All Rights Reserved</p>
+  </footer>
+
+  <!-- Glide.js Script -->
+  <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"></script>
+  <!-- Main JS -->
+  <script>
+    // Newsletter form submission
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        console.log('Subscription email:', email);
+        alert('Thanks for subscribing!');
+        this.reset();
+      });
+    }
+
+    // Video Selection Logic
+    window.addEventListener("DOMContentLoaded", () => {
+      const mainVideo = document.getElementById("main-video");
+      const videoCards = document.querySelectorAll(".video-card");
+
+      // Check if a video parameter is present in the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const videoSrc = urlParams.get('video');
+
+      if (videoSrc) {
+        // If found, load and autoplay the video
+        mainVideo.src = decodeURIComponent(videoSrc) + "?autoplay=1";
+      }
+
+      videoCards.forEach(card => {
+        card.addEventListener("click", () => {
+          const newVideoSrc = card.getAttribute("data-video");
+          if (card.classList.contains("product-video")) {
+            // Redirect product videos to music.html with video query parameter
+            window.location.href = `music.html?video=${encodeURIComponent(newVideoSrc)}`;
+          } else {
+            // Play selected video in the main display
+            if (newVideoSrc) {
+              mainVideo.src = newVideoSrc + "?autoplay=1";
+            }
+          }
+        });
+      });
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Glide Carousel Initialization
+    document.addEventListener('DOMContentLoaded', function () {
+      var glide = new Glide('.glide', {
+        type: 'carousel',
+        perView: 3, // Adjust as needed
+        gap: 10     // Pixel gap between slides
+      });
+      glide.mount();
+    });
+
+    // Dynamic Episode Loading
+    const episodes = [
+      { title: 'Episode 1', description: 'Discussion on current events.', link: 'episode1.html' },
+      { title: 'Episode 2', description: 'Deep dive into finance.', link: 'episode2.html' },
+      { title: 'Episode 3', description: 'Debate on technology trends.', link: 'episode3.html' }
+    ];
+
+    const episodeGrid = document.querySelector('.episode-grid');
+    if (episodeGrid) {
+      episodes.forEach(episode => {
+        const card = document.createElement('div');
+        card.className = 'episode-card';
+        card.innerHTML = `
+          <h3>${episode.title}</h3>
+          <p>${episode.description}</p>
+          <a href="${episode.link}" class="btn">Watch Now</a>
+        `;
+        episodeGrid.appendChild(card);
+      });
+    }
+
+    // Optional Page Transitions
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function (e) {
+        if (link.href && !link.href.includes('#')) {
+          e.preventDefault();
+          document.body.classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = link.href;
+          }, 300);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
