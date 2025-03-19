@@ -63,9 +63,9 @@ const wavesurfer = WaveSurfer.create({
   });
   
   // Auto-play when the track is ready
-   // wavesurfer.on('ready', () => {
-   // wavesurfer.play(); 
-  //});
+  //  wavesurfer.on('ready', () => {
+  //  wavesurfer.play(); 
+  //  });
   
   // Auto-advance to the next track when the current one ends
   wavesurfer.on('finish', () => {

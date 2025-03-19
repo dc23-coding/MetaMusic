@@ -8,58 +8,34 @@ particlesJS("particles-js", {
       }
     },
     "color": {
-      "value": "#bb86fc"
+      "value": "#ffffff"  // White color for the particles
     },
     "shape": {
       "type": "circle",
       "stroke": {
         "width": 0,
         "color": "#000000"
-      },
-      "polygon": {
-        "nb_sides": 5
       }
     },
     "opacity": {
-      "value": 0.5,
-      "random": false,
-      "anim": {
-        "enable": false,
-        "speed": 1,
-        "opacity_min": 0.1,
-        "sync": false
-      }
+      "value": 1,
+      "random": false
     },
     "size": {
-      "value": 3,
-      "random": true,
-      "anim": {
-        "enable": false,
-        "speed": 40,
-        "size_min": 0.1,
-        "sync": false
-      }
+      "value": 2,
+      "random": true
     },
     "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#bb86fc",
-      "opacity": 0.4,
-      "width": 1
+      "enable": false  // Disable connecting lines
     },
     "move": {
       "enable": true,
-      "speed": 6,
+      "speed": 1,        // Gentle movement
       "direction": "none",
-      "random": false,
+      "random": true,
       "straight": false,
       "out_mode": "out",
-      "bounce": false,
-      "attract": {
-        "enable": false,
-        "rotateX": 600,
-        "rotateY": 1200
-      }
+      "bounce": false
     }
   },
   "interactivity": {

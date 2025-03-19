@@ -16,7 +16,7 @@
   }
   
   /* Fixed Border Design */
-  body::before,
+/*  body::before,
   body::after {
     content: "";
     position: fixed;
@@ -170,6 +170,47 @@
     box-shadow: 0 0 20px 10px rgba(231, 209, 6, 0.631);
   }
   
+  /* Columns container (for extra content, such as informational panels or additional content) */
+.columns-container {
+    display: flex;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+  
+  .column {
+    flex: 1;
+    background-color: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 8px;
+    opacity: 0;               /* start hidden */
+    transform: translateY(20px); /* slight slide */
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  
+  /* When columns are made visible */
+  .column.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Adjusted Particle Container is already defined */
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    pointer-events: none;
+    background: transparent;
+    /* Add a white glow to the particles canvas */
+    #particles-js canvas {
+    filter: drop-shadow(0 0 8px #ffffff);
+  }
+  
+  }
   
   
   /* Footer */
