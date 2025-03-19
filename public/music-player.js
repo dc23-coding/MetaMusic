@@ -1,13 +1,17 @@
-// Initialize WaveSurfer
+// Initialize WaveSurfer (Music-Player Changes)
 const wavesurfer = WaveSurfer.create({
     container: '#waveform',
-    waveColor: '#bb86fc',
-    progressColor: '#03dac6',
+    waveColor: '#87CEEB',
+    progressColor: '#FFD700',
+    backgroundColor: '#000',
+    cursorColor: '#FFD700',
     height: 150,
     barWidth: 2,
+    barGap: 2,
+    barRadius: 3,
     responsive: true,
   });
-  
+
   // Track list
   const tracks = [
     { title: 'Kick Back and Chill', src: 'audio/Kick-Back-and-Chill.mp3' },
@@ -86,7 +90,7 @@ const wavesurfer = WaveSurfer.create({
       console.log("Average amplitude:", average); // Check amplitude changes in console
   
       // Increase multiplier: scale will now range roughly from 1 to 3.
-      const scale = 1 + (average / 255) * 3;
+      const scale = 1 + (average / 255) * 20;
       const pulseEl = document.getElementById("pulse");
       if (pulseEl) {
         pulseEl.style.transform = `translate(-50%, -50%) scale(${scale})`;

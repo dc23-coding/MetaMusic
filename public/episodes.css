@@ -1,8 +1,8 @@
 body::before,
     :root {
-      --bg-primary: #121212;
+      --bg-primary: #ffffff;
       --bg-secondary: #333333;
-      --text-primary: #ffffff;
+      --text-primary: #000;
       --text-secondary: #b3b3b3;
       --accent: #bb86fc;
       --error: #cf6679;
@@ -15,25 +15,25 @@ body::before,
       box-sizing: border-box;
     }
 
-    /* Fixed border design */
+    /* Fixed border design 
     body::after {
       content: "";
       position: fixed;
       top: 0;
       width: 250px;
-      /* Adjust width as needed */
+      /* Adjust width as needed 
       height: 100vh;
       background: linear-gradient(to bottom, rgba(187, 134, 252, 0.2), rgba(3, 218, 198, 0.2));
       z-index: 10;
-    }
+    }  */
 
-    body::before {
+ /*   body::before {
       left: 0;
     }
 
     body::after {
       right: 0;
-    }
+    }   */
 
     @media (max-width: 1024px) {
       body::before,
@@ -50,7 +50,7 @@ body::before,
     }
 
     header {
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+      background: transparent;
       padding: 1rem;
       position: fixed;
       width: 100%;
@@ -67,7 +67,7 @@ body::before,
     }
 
     .logo img {
-      height: 50px;
+      height: 75px;
     }
 
     .nav-links,
@@ -109,8 +109,12 @@ body::before,
       color: var(--text-primary);
     }
 
+    h2 {
+        color: #000;
+      }
+
     .hero p {
-      color: var(--text-secondary);
+      color: var(--text-primary);
       height: 5%;
     }
 
@@ -195,7 +199,7 @@ body::before,
       height: 100%;
     }
 
-    /* Home Page Styles */
+     Home Page Styles 
     .border-overlay {
       position: fixed;
       top: 0;
@@ -215,7 +219,7 @@ body::before,
       height: 100vh;
       background: linear-gradient(to bottom, rgba(187, 134, 252, 0.2), rgba(3, 218, 198, 0.2));
       z-index: 10;
-    }
+    } 
 
     .hero {
       position: relative;
@@ -315,7 +319,7 @@ body::before,
     }
 
     footer {
-      background-color: var(--bg-secondary);
+        background-color: var(#000);
       padding: 2rem;
       margin-top: 4rem;
       text-align: center;
@@ -330,10 +334,6 @@ body::before,
     @media (max-width: 768px) {
       .nav-links {
         display: none;
-      }
-
-      .newsletter form {
-        flex-direction: column;
       }
     }
 
