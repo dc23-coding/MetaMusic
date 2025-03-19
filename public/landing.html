@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Relaxed CSP for now – adjust as needed -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline';">
   <title>Video Intro - Delusions Of Grandeur</title>
   <link rel="stylesheet" href="landing.css" />
   <script src="landing.js" defer></script>
 </head>
 <body>
+  <!-- Video Hero Section -->
   <section class="video-hero">
     <video id="landing-video" autoplay muted playsinline>
       <source src="video/Harvest-intro.mp4" type="video/mp4">
@@ -20,5 +23,17 @@
       <button class="btn" id="enter-btn">Enter</button>
     </div>
   </section>
+
+  <!-- Navigation Modal -->
+  <div id="navigation-modal" class="modal">
+    <div class="modal-content">
+      <h2>Select a Section</h2>
+      <button class="modal-btn" data-target="home.html">Home</button>
+      <button class="modal-btn" data-target="episodes.html">Episodes</button>
+      <button class="modal-btn" data-target="music.html">Music</button>
+      <button class="modal-btn" data-target="games.html">Games</button>
+      <button class="modal-close" id="modal-close-btn">Cancel</button>
+    </div>
+  </div>
 </body>
 </html>

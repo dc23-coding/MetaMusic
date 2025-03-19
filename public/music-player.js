@@ -10,10 +10,10 @@ const wavesurfer = WaveSurfer.create({
   
   // Track list
   const tracks = [
-    { title: 'We Gone Ball', src: 'audio/We-Gone-Ball.mp3' },
-    { title: 'Why Not', src: 'audio/Why-Not.mp3' },
-    { title: 'Really Wanna See', src: 'audio/Really-Wanna-See.mp3' },
     { title: 'Kick Back and Chill', src: 'audio/Kick-Back-and-Chill.mp3' },
+    { title: 'We Gone Ball', src: 'audio/We-Gone-Ball.mp3' },
+    { title: 'Really Wanna See', src: 'audio/Really-Wanna-See.mp3' },
+    { title: 'Why Not', src: 'audio/Why-Not.mp3' },
   ];
   let currentTrackIndex = 0;
   

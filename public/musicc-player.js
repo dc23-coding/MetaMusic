@@ -3,6 +3,7 @@ const wavesurfer = WaveSurfer.create({
     container: '#waveform',
     waveColor: '#bb86fc',
     progressColor: '#03dac6',
+    backgroundColor: '#000',
     height: 150,
     barWidth: 2,
     responsive: true,

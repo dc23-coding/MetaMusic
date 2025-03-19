@@ -105,9 +105,10 @@
     margin: auto;
     width: 80%;
     height: 150px;
-    background-color: var(--bg-secondary);
+    background-color: transparent!important;
     border-radius: 8px;
   }
+  
   .now-playing {
     margin-top: 1rem;
     font-size: 1.2rem;
