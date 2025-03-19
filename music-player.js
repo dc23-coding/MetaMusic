@@ -73,6 +73,32 @@ const wavesurfer = WaveSurfer.create({
     loadTrack(currentTrackIndex);
   });
   
+  wavesurfer.on('audioprocess', () => {
+    const analyser = wavesurfer.backend.analyser;
+    if (analyser) {
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyser.getByteFrequencyData(dataArray);
+  
+      // Calculate average amplitude
+      const sum = dataArray.reduce((acc, value) => acc + value, 0);
+      const average = sum / bufferLength;
+      console.log("Average amplitude:", average); // Check amplitude changes in console
+  
+      // Increase multiplier: scale will now range roughly from 1 to 3.
+      const scale = 1 + (average / 255) * 3;
+      const pulseEl = document.getElementById("pulse");
+      if (pulseEl) {
+        pulseEl.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        // Optionally adjust glow strength with the amplitude:
+        const glowIntensity = 10 + (average / 255) * 20; // ranges from 10px to 30px
+        pulseEl.style.boxShadow = `0 0 ${glowIntensity}px ${glowIntensity / 2}px rgba(187, 134, 252, 0.7)`;
+      }
+    }
+  });
+  
+  
+  
+  
   // Load the first track on page load
   loadTrack(currentTrackIndex);
-  
