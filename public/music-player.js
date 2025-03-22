@@ -27,7 +27,9 @@ const wavesurfer = WaveSurfer.create({
     currentTrackIndex = index;
     const track = tracks[index];
     document.getElementById('nowPlaying').innerText = `Now Playing: ${track.title}`;
-    wavesurfer.load(track.src);
+    wavesurfer.load(track.src).catch((error) => {
+      console.error('Failed to load track:', error);
+    });
     console.log('Loading track:', track.src);
   }
   
@@ -77,29 +79,38 @@ const wavesurfer = WaveSurfer.create({
     loadTrack(currentTrackIndex);
   });
   
+  let smoothAverage = 0;
+const smoothingFactor = 0.2; // Adjust for smoother transitions
+const pulseEl = document.getElementById("pulse");
+
+if (!pulseEl) {
+  console.error('Element with ID "pulse" not found.');
+} else {
   wavesurfer.on('audioprocess', () => {
     const analyser = wavesurfer.backend.analyser;
     if (analyser) {
       const bufferLength = analyser.frequencyBinCount;
       const dataArray = new Uint8Array(bufferLength);
       analyser.getByteFrequencyData(dataArray);
-  
+
       // Calculate average amplitude
       const sum = dataArray.reduce((acc, value) => acc + value, 0);
       const average = sum / bufferLength;
-      console.log("Average amplitude:", average); // Check amplitude changes in console
-  
-      // Increase multiplier: scale will now range roughly from 1 to 3.
-      const scale = 1 + (average / 255) * 20;
-      const pulseEl = document.getElementById("pulse");
-      if (pulseEl) {
-        pulseEl.style.transform = `translate(-50%, -50%) scale(${scale})`;
-        // Optionally adjust glow strength with the amplitude:
-        const glowIntensity = 10 + (average / 255) * 20; // ranges from 10px to 30px
-        pulseEl.style.boxShadow = `0 0 ${glowIntensity}px ${glowIntensity / 2}px rgba(187, 134, 252, 0.7)`;
-      }
+
+      // Apply smoothing
+      smoothAverage = smoothingFactor * average + (1 - smoothingFactor) * smoothAverage;
+
+      // Apply visual effects
+      const scale = 1 + (smoothAverage / 255) * 20;
+      pulseEl.style.transform = `translate(-50%, -50%) scale(${scale})`;
+
+      // Dynamic glow color and intensity
+      const glowIntensity = 10 + (smoothAverage / 255) * 20;
+      const glowColor = `rgba(${187 + smoothAverage / 2}, ${134 - smoothAverage / 2}, ${252 - smoothAverage / 2}, 0.7)`;
+      pulseEl.style.boxShadow = `0 0 ${glowIntensity}px ${glowIntensity / 2}px ${glowColor}`;
     }
   });
+}
   
   
   
