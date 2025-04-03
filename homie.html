@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delusions Of Grandeur - Home</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at center, #121212, #000);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: #ffffff;
+    }
+    /* Container for the interactive menu */
+    .menu-container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+    }
+    /* A prompt to invite navigation */
+    .prompt {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #bb86fc;
+      z-index: 10;
+    }
+    /* The central hub element */
+    .central-hub {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: #bb86fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 20px rgba(187, 134, 252, 0.7);
+      z-index: 5;
+    }
+    .central-hub:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    .central-hub span {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #121212;
+    }
+    /* Menu options styled as circular buttons */
+    .menu-option {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(3, 218, 198, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+      box-shadow: 0 0 15px rgba(3, 218, 198, 0.7);
+      z-index: 4;
+    }
+    .menu-option:hover {
+      transform: scale(1.1);
+      background: rgba(3, 218, 198, 1);
+    }
+    .menu-option span {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #121212;
+    }
+    /* Positioning the menu options around the central hub */
+    /* Music at the top */
+    .menu-option.music {
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    /* Episodes to the right */
+    .menu-option.episodes {
+      top: 50%;
+      right: 0;
+      transform: translate(50%, -50%);
+    }
+    /* Games at the bottom */
+    .menu-option.games {
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 50%);
+    }
+    /* Fade in animations for a smooth entrance */
+    .menu-container,
+    .central-hub,
+    .menu-option {
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+    .central-hub {
+      animation-delay: 0.2s;
+    }
+    .menu-option {
+      animation-delay: 0.4s;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-container">
+    <div class="prompt">Where would you like to go?</div>
+    <!-- Central hub: could be an introduction or lead to an About page -->
+    <div class="central-hub" onclick="location.href='home.html'">
+      <span>Welcome</span>
+    </div>
+    <!-- Menu options linking to different sections -->
+    <div class="menu-option music" onclick="location.href='music.html'">
+      <span>Music</span>
+    </div>
+    <div class="menu-option episodes" onclick="location.href='episodes.html'">
+      <span>Episodes</span>
+    </div>
+    <div class="menu-option games" onclick="location.href='games.html'">
+      <span>Games</span>
+    </div>
+  </div>
+  <script>
+    // Additional interactivity can be added here.
+    // For example, you could add subtle animations or sound effects on hover.
+  </script>
+</body>
+</html>
