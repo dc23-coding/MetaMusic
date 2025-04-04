@@ -129,6 +129,137 @@
     </nav>
   </header>
   
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delusions Of Grandeur - Home Portal</title>
+  <style>
+    /* Base Reset and Background */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at center, #121212, #000);
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+    }
+    /* Header with full-word tabs spread evenly */
+    header {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      display: flex;
+      justify-content: center;
+    }
+    .nav-orbs {
+      width: 90%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+    .small-orb {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: 100px;
+      background: #bb86fc;
+      border-radius: 50%;
+      text-decoration: none;
+      color: #121212;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(187,134,252,0.7);
+      transition: transform 0.3s ease;
+      font-size: 14px;
+      text-align: center;
+      padding: 10px;
+    }
+    .small-orb:hover {
+      transform: scale(1.1);
+    }
+    .small-orb.social {
+      background: #03dac6;
+    }
+    /* Portal Container */
+    .portal-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      z-index: 10;
+    }
+    .background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(187,134,252,0.3) 0%, rgba(3,218,198,0.3) 70%, transparent 100%);
+      border-radius: 50%;
+      animation: pulse 3s infinite alternate;
+    }
+    @keyframes pulse {
+      from { transform: scale(0.9); }
+      to { transform: scale(1.1); }
+    }
+    .portal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: #bb86fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(187,134,252,0.7);
+      transition: transform 0.3s ease;
+      z-index: 2;
+    }
+    .portal:hover {
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+    .portal-text {
+      font-size: 1.5rem;
+      text-align: center;
+      color: #121212;
+      font-weight: bold;
+    }
+    .instructions {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 1rem;
+      color: #bb86fc;
+      z-index: 10;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Navigation Tabs -->
+  <header>
+    <nav class="nav-orbs">
+      <a href="episodes.html" class="small-orb">Episodes</a>
+      <a href="music.html" class="small-orb">Music</a>
+      <a href="games.html" class="small-orb">Games</a>
+      <!-- Social Media Tabs -->
+      <a href="https://www.youtube.com/@Thelazyakata" class="small-orb social" target="_blank">YouTube</a>
+      <a href="https://www.instagram.com/cleshay_heru/p#" class="small-orb social" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@cleshayheru" class="small-orb social" target="_blank">TikTok</a>
+    </nav>
+  </header>
+  
   <!-- Portal Section -->
   <div class="portal-container">
     <div class="background"></div>
@@ -140,13 +271,20 @@
   
   <script>
     function enterPortal() {
-      // Animate the portal briefly before playing audio and navigating
+      // Animate the portal briefly
       document.querySelector('.portal').style.transform = "translate(-50%, -50%) scale(1.2)";
-      // You can insert your audio playing code here.
+      // Wait a moment for the animation before navigating
       setTimeout(() => {
-        window.location.href = 'home.html';
+        // Array of destination pages
+        const pages = ['episodes.html', 'music.html', 'games.html'];
+        // Pick one randomly
+        const randomPage = pages[Math.floor(Math.random() * pages.length)];
+        // Navigate to the randomly chosen page
+        window.location.href = randomPage;
       }, 500);
     }
   </script>
 </body>
+</html>
+
 </html>

@@ -1,10 +1,11 @@
 {
-  "name": "metaVerse",
+  "name": "MetaVerse",
   "version": "1.0.0",
   "scripts": {
     "build": "echo \"No build step needed\""
   },
   "dependencies": {
-    "@glidejs/glide": "^3.7.1"
+    "@glidejs/glide": "^3.7.1",
+    "bootstrap": "^5.3.3"
   }
 }
