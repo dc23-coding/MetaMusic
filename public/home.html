@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Delusions Of Grandeur - Home Portal</title>
   <style>
-    /* Base Reset and Background */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
       width: 100%;
@@ -13,10 +12,11 @@
       font-family: 'Inter', sans-serif;
       background: radial-gradient(circle at center, #121212, #000);
       color: #fff;
-      overflow: hidden;
+      overflow-x: auto;
+      overflow-y: hidden;
       position: relative;
     }
-    /* Header with full-word tabs spread evenly */
+
     header {
       position: absolute;
       top: 20px;
@@ -27,12 +27,21 @@
       justify-content: center;
     }
     .nav-orbs {
-      width: 90%;
       display: flex;
-      justify-content: space-evenly;
       align-items: center;
+      width: auto;
+      padding: 0 20px;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .nav-orbs::-webkit-scrollbar {
+      display: none;
     }
     .small-orb {
+      flex: 0 0 auto;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -48,6 +57,7 @@
       font-size: 14px;
       text-align: center;
       padding: 10px;
+      margin: 0 10px;
     }
     .small-orb:hover {
       transform: scale(1.1);
@@ -55,14 +65,14 @@
     .small-orb.social {
       background: #03dac6;
     }
-    /* Portal Container */
+
     .portal-container {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 600px;
-      height: 600px;
+      width: 300px; /* Mobile default */
+      height: 300px;
       z-index: 10;
     }
     .background {
@@ -82,8 +92,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 250px;
-      height: 250px;
+      width: 150px; /* Mobile default */
+      height: 150px;
       border-radius: 50%;
       background: #bb86fc;
       display: flex;
@@ -98,193 +108,184 @@
       transform: translate(-50%, -50%) scale(1.05);
     }
     .portal-text {
-      font-size: 1.5rem;
+      font-size: 1rem; /* Mobile default */
       text-align: center;
       color: #121212;
       font-weight: bold;
     }
+
+    .sliding-text {
+      position: absolute;
+      top: 70%;
+      width: 100%;
+      text-align: center;
+      font-size: 1rem; /* Mobile default */
+      color: #bb86fc;
+      animation: slideIn 3s ease forwards;
+      opacity: 0;
+      padding: 0 10px;
+    }
+
+    @keyframes slideIn {
+      0% {
+          transform: translateX(-100%);
+          opacity: 0;
+      }
+      50% {
+          opacity: 0.5;
+      }
+      100% {
+          transform: translateX(0);
+          opacity: 1;
+      }
+    }
+
+    @keyframes slideInRight {
+      0% {
+          transform: translateX(100%);
+          opacity: 0;
+      }
+      50% {
+          opacity: 0.5;
+      }
+      100% {
+          transform: translateX(0);
+          opacity: 1;
+      }
+    }
+
     .instructions {
       position: absolute;
       bottom: 20px;
       width: 100%;
       text-align: center;
-      font-size: 1rem;
+      font-size: 0.8rem; /* Mobile default */
       color: #bb86fc;
       z-index: 10;
       letter-spacing: 1px;
     }
+
+    /* Tablet and up (768px) */
+    @media (min-width: 768px) {
+      .portal-container {
+        width: 400px;
+        height: 400px;
+      }
+      .portal {
+        width: 200px;
+        height: 200px;
+      }
+      .portal-text {
+        font-size: 1.2rem;
+      }
+      .sliding-text {
+        font-size: 1.2rem;
+      }
+      .instructions {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Desktop and up (1024px) */
+    @media (min-width: 1024px) {
+      .portal-container {
+        width: 600px;
+        height: 600px;
+      }
+      .portal {
+        width: 250px;
+        height: 250px;
+      }
+      .portal-text {
+        font-size: 1.5rem;
+      }
+      .sliding-text {
+        font-size: 1.5rem;
+      }
+      .instructions {
+        font-size: 1rem;
+      }
+      .nav-orbs {
+        width: 90%; /* Fit all orbs without scrolling */
+        max-width: 1200px; /* Cap width for very large screens */
+        overflow-x: hidden; /* No scrolling needed */
+        justify-content: space-evenly; /* Even spacing when all visible */
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Header Navigation Tabs -->
   <header>
     <nav class="nav-orbs">
       <a href="episodes.html" class="small-orb">Episodes</a>
       <a href="music.html" class="small-orb">Music</a>
       <a href="games.html" class="small-orb">Games</a>
-      <!-- Social Media Tabs -->
       <a href="https://www.youtube.com/@Thelazyakata" class="small-orb social" target="_blank">YouTube</a>
       <a href="https://www.instagram.com/cleshay_heru/p#" class="small-orb social" target="_blank">Instagram</a>
       <a href="https://www.tiktok.com/@cleshayheru" class="small-orb social" target="_blank">TikTok</a>
     </nav>
   </header>
-  
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Delusions Of Grandeur - Home Portal</title>
-  <style>
-    /* Base Reset and Background */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      width: 100%;
-      height: 100%;
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at center, #121212, #000);
-      color: #fff;
-      overflow: hidden;
-      position: relative;
-    }
-    /* Header with full-word tabs spread evenly */
-    header {
-      position: absolute;
-      top: 20px;
-      left: 0;
-      width: 100%;
-      z-index: 20;
-      display: flex;
-      justify-content: center;
-    }
-    .nav-orbs {
-      width: 90%;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-    }
-    .small-orb {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100px;
-      height: 100px;
-      background: #bb86fc;
-      border-radius: 50%;
-      text-decoration: none;
-      color: #121212;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(187,134,252,0.7);
-      transition: transform 0.3s ease;
-      font-size: 14px;
-      text-align: center;
-      padding: 10px;
-    }
-    .small-orb:hover {
-      transform: scale(1.1);
-    }
-    .small-orb.social {
-      background: #03dac6;
-    }
-    /* Portal Container */
-    .portal-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px;
-      height: 600px;
-      z-index: 10;
-    }
-    .background {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(187,134,252,0.3) 0%, rgba(3,218,198,0.3) 70%, transparent 100%);
-      border-radius: 50%;
-      animation: pulse 3s infinite alternate;
-    }
-    @keyframes pulse {
-      from { transform: scale(0.9); }
-      to { transform: scale(1.1); }
-    }
-    .portal {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      background: #bb86fc;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: 0 0 30px rgba(187,134,252,0.7);
-      transition: transform 0.3s ease;
-      z-index: 2;
-    }
-    .portal:hover {
-      transform: translate(-50%, -50%) scale(1.05);
-    }
-    .portal-text {
-      font-size: 1.5rem;
-      text-align: center;
-      color: #121212;
-      font-weight: bold;
-    }
-    .instructions {
-      position: absolute;
-      bottom: 20px;
-      width: 100%;
-      text-align: center;
-      font-size: 1rem;
-      color: #bb86fc;
-      z-index: 10;
-      letter-spacing: 1px;
-    }
-  </style>
-</head>
-<body>
-  <!-- Header Navigation Tabs -->
-  <header>
-    <nav class="nav-orbs">
-      <a href="episodes.html" class="small-orb">Episodes</a>
-      <a href="music.html" class="small-orb">Music</a>
-      <a href="games.html" class="small-orb">Games</a>
-      <!-- Social Media Tabs -->
-      <a href="https://www.youtube.com/@Thelazyakata" class="small-orb social" target="_blank">YouTube</a>
-      <a href="https://www.instagram.com/cleshay_heru/p#" class="small-orb social" target="_blank">Instagram</a>
-      <a href="https://www.tiktok.com/@cleshayheru" class="small-orb social" target="_blank">TikTok</a>
-    </nav>
-  </header>
-  
-  <!-- Portal Section -->
+
   <div class="portal-container">
     <div class="background"></div>
     <div class="portal" onclick="enterPortal()">
       <div class="portal-text">Step into the Universe</div>
     </div>
-    <div class="instructions">Hover &amp; Click the portal to explore Delusions Of Grandeur</div>
+    <div class="instructions">Hover & Click the portal to explore Delusions Of Grandeur</div>
   </div>
-  
+
+  <div class="sliding-text" id="advertisement">Discover the New Era of Entertainment!</div>
+
   <script>
     function enterPortal() {
-      // Animate the portal briefly
       document.querySelector('.portal').style.transform = "translate(-50%, -50%) scale(1.2)";
-      // Wait a moment for the animation before navigating
       setTimeout(() => {
-        // Array of destination pages
         const pages = ['episodes.html', 'music.html', 'games.html'];
-        // Pick one randomly
         const randomPage = pages[Math.floor(Math.random() * pages.length)];
-        // Navigate to the randomly chosen page
         window.location.href = randomPage;
       }, 500);
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const animationDuration = 3000;
+      const displayDuration = 2000;
+
+      const textSequence = [
+        { id: 'advertisement', text: 'Discover the New Era of Entertainment!', animation: 'slideIn' },
+        { text: 'Step Into The Universe Now!', animation: 'slideInRight' }
+      ];
+
+      let currentIndex = 0;
+
+      function showNextText() {
+        if (currentIndex >= textSequence.length) {
+          return;
+        }
+
+        let currentTextElement;
+        
+        if (currentIndex === 0) {
+          currentTextElement = document.getElementById(textSequence[0].id);
+          currentTextElement.style.animation = `${textSequence[0].animation} 3s ease forwards`;
+        } else {
+          currentTextElement = document.createElement('div');
+          currentTextElement.className = 'sliding-text';
+          currentTextElement.innerText = textSequence[currentIndex].text;
+          currentTextElement.style.animation = `${textSequence[currentIndex].animation} 3s ease forwards`;
+          document.body.appendChild(currentTextElement);
+        }
+
+        currentTextElement.addEventListener('animationend', () => {
+          setTimeout(() => {
+            currentTextElement.style.display = 'none';
+            currentIndex++;
+            showNextText();
+          }, displayDuration);
+        });
+      }
+
+      showNextText();
+    });
   </script>
 </body>
-</html>
-
 </html>

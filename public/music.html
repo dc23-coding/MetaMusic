@@ -1,17 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Music Page</title>
-  <link rel="stylesheet" href="./music.css">
   <script src="https://unpkg.com/wavesurfer.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="music-player.js" defer></script>
   <script src="particles-init.js" defer></script>
-</head>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: auto;
+      overflow-y: auto; /* Allow vertical scroll for content */
+      position: relative;
+    }
 
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      background: rgba(0, 0, 0, 0.8);
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    nav::-webkit-scrollbar {
+      display: none;
+    }
+    .logo img {
+      width: 50px; /* Mobile default */
+      height: auto;
+    }
+    .nav-links, .quick-pick-menu {
+      list-style: none;
+      display: flex;
+      margin: 0 10px;
+    }
+    .nav-links li, .quick-pick-menu li {
+      margin: 0 10px;
+    }
+    .nav-links a, .quick-pick-menu a {
+      color: #bb86fc;
+      text-decoration: none;
+      font-size: 0.9rem; /* Mobile default */
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover, .quick-pick-menu a:hover {
+      color: #03dac6;
+    }
+
+    main {
+      position: relative;
+      z-index: 10;
+      padding: 20px;
+      min-height: calc(100vh - 100px); /* Adjust for header/footer */
+    }
+    .music-player {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    #waveform {
+      width: 100%;
+      height: 100px; /* Mobile default */
+      background: rgba(187, 134, 252, 0.1);
+    }
+    .now-playing {
+      font-size: 1rem; /* Mobile default */
+      color: #bb86fc;
+      margin: 10px 0;
+      text-align: center;
+    }
+    .player-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+    .player-controls button {
+      padding: 8px 16px;
+      background: #bb86fc;
+      border: none;
+      border-radius: 20px;
+      color: #121212;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .player-controls button:hover {
+      transform: scale(1.05);
+    }
+    .track-list {
+      list-style: none;
+      margin: 10px 0;
+      max-height: 150px; /* Mobile default */
+      overflow-y: auto;
+    }
+    .track-list li {
+      padding: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.9rem; /* Mobile default */
+      transition: background 0.3s ease;
+    }
+    .track-list li:hover {
+      background: rgba(187, 134, 252, 0.2);
+    }
+
+    .elements-container {
+      position: relative;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .planetary {
+      width: 100px; /* Mobile default */
+      height: auto;
+      display: block;
+      margin: 10px auto;
+    }
+    .remote-player {
+      width: 80px; /* Mobile default */
+      height: auto;
+      display: block;
+      margin: 10px auto;
+    }
+    .sun-group-container {
+      position: relative;
+    }
+    .sun-group {
+      width: 120px; /* Mobile default */
+      height: auto;
+      display: block;
+      margin: 10px auto;
+    }
+
+    footer {
+      position: relative;
+      z-index: 10;
+      padding: 10px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.8);
+    }
+    .social-links a {
+      color: #03dac6;
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 0.9rem; /* Mobile default */
+      transition: color 0.3s ease;
+    }
+    .social-links a:hover {
+      color: #bb86fc;
+    }
+    footer p {
+      font-size: 0.8rem; /* Mobile default */
+      color: #fff;
+      margin-top: 5px;
+    }
+
+    /* Tablet and up (768px) */
+    @media (min-width: 768px) {
+      .logo img {
+        width: 70px;
+      }
+      .nav-links a, .quick-pick-menu a {
+        font-size: 1rem;
+      }
+      #waveform {
+        height: 150px;
+      }
+      .now-playing {
+        font-size: 1.2rem;
+      }
+      .player-controls button {
+        padding: 10px 20px;
+      }
+      .track-list {
+        max-height: 200px;
+      }
+      .track-list li {
+        font-size: 1rem;
+      }
+      .planetary {
+        width: 150px;
+      }
+      .remote-player {
+        width: 100px;
+      }
+      .sun-group {
+        width: 180px;
+      }
+      .social-links a {
+        font-size: 1rem;
+      }
+      footer p {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Desktop and up (1024px) */
+    @media (min-width: 1024px) {
+      nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        overflow-x: hidden; /* No scrolling needed */
+        justify-content: space-between;
+      }
+      .logo img {
+        width: 100px;
+      }
+      .nav-links, .quick-pick-menu {
+        margin: 0 20px;
+      }
+      .nav-links a, .quick-pick-menu a {
+        font-size: 1.2rem;
+      }
+      .music-player {
+        max-width: 800px;
+      }
+      #waveform {
+        height: 200px;
+      }
+      .now-playing {
+        font-size: 1.5rem;
+      }
+      .player-controls button {
+        padding: 12px 24px;
+      }
+      .track-list {
+        max-height: 250px;
+      }
+      .track-list li {
+        font-size: 1.2rem;
+        padding: 10px;
+      }
+      .planetary {
+        width: 200px;
+      }
+      .remote-player {
+        width: 120px;
+      }
+      .sun-group {
+        width: 240px;
+      }
+      .social-links a {
+        font-size: 1.2rem;
+      }
+      footer p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
 <body>
   <div id="particles-js"></div>
   <header>
@@ -33,9 +295,7 @@
 
   <main>
     <div class="music-player">
-      <!-- The WaveSurfer visualization -->
       <div id="waveform"></div>
-      <!-- Now Playing display -->
       <div class="now-playing" id="nowPlaying">Now Playing: </div>
       <div class="player-controls">
         <button id="prevBtn">Prev</button>
@@ -49,26 +309,23 @@
         <li data-src="audio/Why-Not.mp3">Why Not</li>
         <li data-src="audio/murder1.mp3">On Me</li>
       </ul>
-       <div class="elements-container">
-        <!-- Planet Image -->
+      <div class="elements-container">
         <img src="images/planetary.png" alt="Planet" class="planetary">
-        <!-- Remote Control Image -->
         <img src="images/remote-player.svg" alt="Remote Control" class="remote-player">
-        <!-- Sun Group Container -->
         <div class="sun-group-container">
           <img src="images/sun-group.svg" alt="Sun Group" class="sun-group">
         </div>
-    
+      </div>
     </div>
   </main>
 
-    <footer>
-      <div class="social-links">
-        <a href="https://www.youtube.com/@Thelazyakata">YouTube</a>
-        <a href="https://www.instagram.com/cleshay_heru/p#">Instagram</a>
-        <a href="https://www.tiktok.com/@cleshayheru">TikTok</a>
-      </div>
-      <p>&copy; 2025 Harvest Union. All Rights Reserved</p>
-    </footer>
-  </body>
+  <footer>
+    <div class="social-links">
+      <a href="https://www.youtube.com/@Thelazyakata">YouTube</a>
+      <a href="https://www.instagram.com/cleshay_heru/p#">Instagram</a>
+      <a href="https://www.tiktok.com/@cleshayheru">TikTok</a>
+    </div>
+    <p>© 2025 Harvest Union. All Rights Reserved</p>
+  </footer>
+</body>
 </html>
