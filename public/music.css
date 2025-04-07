@@ -114,14 +114,27 @@
     background-color: transparent!important;
     border-radius: 8px;
   }
+  
+  /* New position for the sun element (swap to planetary's original position) */
+.sun-group {
+  position: absolute;
+  top: 60%;      /* use the planetary vertical position */
+  left: 5%;      /* use the planetary horizontal position */
+  width: 375px;  /* adjust size if needed */
+  /* Remove or adjust transform if not needed */
+}
 
-  .planetary {
-    position: absolute;
-    top: 60%;      /* Adjust this value for vertical position */
-    left: 5%;      /* Adjust this value for horizontal position */
-    width: 175px;  /* Change size as needed */
-  }
+/* New position for the planetary elements (swap to the sun's original position) */
+.planetary {
+  position: absolute;
+  top: 50%;      /* use the sun's vertical position */
+  left: 50%;     /* use the sun's horizontal position */
+  transform: translate(-50%, -50%); /* center them */
+  width: 200px;  /* adjust size if needed */
+}
 
+
+  
   /* Example element: Remote Control */
   .remote-player {
     position: absolute;
@@ -130,16 +143,6 @@
     width: 100px;
   }
 
-  /* Example element: Tablet (Music Player) */
-  .tablet {
-    position: absolute;
-    top: 50%;      
-    left: 50%;
-    transform: translate(-50%, -50%); /* Centers the tablet */
-    width: 200px;
-  }
-  
-  
   .now-playing {
     margin-top: 1rem;
     font-size: 1.2rem;

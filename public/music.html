@@ -49,8 +49,12 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
-    nav::-webkit-scrollbar {
-      display: none;
+    nav::-webkit-scrollbar { display: none; }
+    .logo img { width: 50px; height: auto; }
+    .nav-links, .quick-pick-menu { list-style: none; display: flex; margin: 0 10px; }
+    .nav-links li, .quick-pick-menu li { margin: 0 10px; }
+    .nav-links a, .quick-pick-menu a {
+      color: #bb86fc; text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;
     }
     .logo img {
       width: 50px; /* Mobile default */
@@ -114,35 +118,56 @@
       transform: scale(1.05);
     }
     .track-list {
-      list-style: none;
+      list-style-type: none !important;
+      padding-left: 0 !important;
       margin: 10px 0;
-      max-height: 150px; /* Mobile default */
-      overflow-y: auto;
+      overflow: hidden;
+      height: 200px; /* Fixed height to show five songs */
+      position: relative;
     }
     .track-list li {
-      padding: 8px;
+      height: 40px; /* Each song item is 40px tall */
+      line-height: 40px;
+      padding: 0 8px;
       color: #fff;
       cursor: pointer;
-      font-size: 0.9rem; /* Mobile default */
-      transition: background 0.3s ease;
+      transition: transform 0.5s ease;
     }
     .track-list li:hover {
       background: rgba(187, 134, 252, 0.2);
     }
-
+    
+    /* Remote Screen for genres (horizontal carousel) */
+    .remote-screen {
+      width: 300px;
+      height: 100px;
+      overflow-x: auto;
+      white-space: nowrap;
+      border: 1px solid #fff; /* For debugging; remove if not needed */
+      margin: 10px auto;
+    }
+    .remote-screen .genre {
+      display: inline-block;
+      width: 100px;
+      text-align: center;
+      padding: 10px;
+      margin-right: 5px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+    }
     .elements-container {
       position: relative;
       margin-top: 20px;
       text-align: center;
     }
     .planetary {
-      width: 100px; /* Mobile default */
+      width: 300px; /* Mobile default */
       height: auto;
       display: block;
       margin: 10px auto;
     }
     .remote-player {
-      width: 80px; /* Mobile default */
+      width: 180px; /* Mobile default */
       height: auto;
       display: block;
       margin: 10px auto;
@@ -151,7 +176,7 @@
       position: relative;
     }
     .sun-group {
-      width: 120px; /* Mobile default */
+      width: 320px; /* Mobile default */
       height: auto;
       display: block;
       margin: 10px auto;
@@ -210,7 +235,7 @@
         width: 100px;
       }
       .sun-group {
-        width: 180px;
+        width: 480px;
       }
       .social-links a {
         font-size: 1rem;
@@ -310,12 +335,15 @@
         <li data-src="audio/murder1.mp3">On Me</li>
       </ul>
       <div class="elements-container">
-        <img src="images/planetary.png" alt="Planet" class="planetary">
-        <img src="images/remote-player.svg" alt="Remote Control" class="remote-player">
         <div class="sun-group-container">
           <img src="images/sun-group.svg" alt="Sun Group" class="sun-group">
         </div>
+        <img src="images/planetary.png" alt="Planet" class="planetary">
+        <img src="images/remote-player.svg" alt="Remote Control" class="remote-player">
       </div>
+      
+      </div>
+      
     </div>
   </main>
 
